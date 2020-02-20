@@ -17,23 +17,26 @@
   <body>
     <nav>
       <ul>
+      <% if session.fetch(:user_id) == nil %>
         <li>
           <a href="/user_sign_in">Sign In</a>
         </li>
         <li>
           <a href="/user_sign_up">Sign Up</a>
         </li>
+      <% else %>
+        <li>
+          <%= User.where({ :id => session.fetch(:user_id) }).first.username %>
+        </li>
         <li>
           <a href="/user_sign_out">Sign Out</a>
         </li>
+      <% end %>
         <li>
           <a href="/users">Users</a>
         </li>
         <li>
           <a href="/photos">Photos</a>
-        </li>
-        <li>
-          <%= session.fetch(:user_id) %>
         </li>
       </ul>
     </nav>
